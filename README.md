@@ -4,7 +4,7 @@ An asynchronous Python client for reverse lookup with an explicitly selected Nom
 
 Requires Python 3.11 or later and a caller-owned `aiohttp.ClientSession`.
 
-Once the release gate below is complete, install the published distribution with `python -m pip install nominatim-reverse-client`.
+Install the published distribution with `python -m pip install nominatim-reverse-client`.
 
 ## Usage
 
@@ -51,7 +51,7 @@ Cancellation propagates to the caller. Provider errors are not retried; callers 
 
 ## Development
 
-From this package directory:
+From the repository root:
 
 ```sh
 python -m pip install -e '.[dev]'
@@ -66,16 +66,14 @@ python -m twine check dist/*
 
 Tests use synthetic responses and never contact a provider. The public `publish-geocoder.yml` workflow validates Python 3.11 and 3.14 and builds both a source distribution and wheel.
 
-## Release gate
+## Releases
 
-The distribution is maintained in this public repository independently of the Home Assistant integration and `pleos-client`. A package release must be published before an integration release pins it.
+The distribution is maintained in [jouwdan/nominatim-reverse-client](https://github.com/jouwdan/nominatim-reverse-client), independently of the [Home Assistant integration](https://github.com/jouwdan/ha-pleos) and `pleos-client`. A package release must be published before an integration release pins it. The source history was extracted from `ha-pleos/packages/nominatim-reverse-client`; version 0.1.0 remains available on PyPI.
 
-Before the first publication, a maintainer must register or reserve the `nominatim-reverse-client` project on PyPI and configure a trusted publisher for repository `jouwdan/ha-pleos`, workflow `publish-geocoder.yml`, and environment `pypi-nominatim-reverse-client`. Configure that GitHub environment with required maintainer approval. This account setup cannot be provided by repository code.
+The PyPI trusted publisher uses repository `jouwdan/nominatim-reverse-client`, workflow `publish-geocoder.yml`, and environment `pypi-nominatim-reverse-client`. That GitHub environment requires maintainer approval and permits only `v*` tags.
 
-After checks and review, tag the approved commit `nominatim-reverse-client-v<version>` matching this package's `pyproject.toml`, then push that tag. The workflow checks the tag/version match, builds the distributions in public CI, and uses OIDC to publish those same artifacts after environment approval. Ordinary integration tags, branch pushes, pull requests, and manual workflow runs cannot publish this distribution. No PyPI token is stored in the repository.
+After updating `pyproject.toml` and `CHANGELOG.md` and reviewing passing checks, tag the approved commit `v<version>` matching the package version, then push that tag. The workflow checks the tag/version match, builds the distributions in public CI, and uses OIDC to publish those same artifacts after environment approval. Branch pushes, pull requests, and manual workflow runs validate without publishing. No PyPI token is stored in the repository.
 
-Do not create a GitHub Release for the package tag: GitHub Releases in this repository belong to the Home Assistant integration and are consumed by HACS. Package provenance is the namespaced Git tag and its public build/publish workflow run; package changes are recorded in `CHANGELOG.md`.
-
-Verify the published wheel and source distribution can be installed before publishing the dependent integration release. Provider credentials or live addresses are not required for release validation.
+Verify the published wheel and source distribution can be installed before creating the GitHub Release and updating dependent integrations. Provider credentials or live addresses are not required for release validation.
 
 Licensed under the MIT license.

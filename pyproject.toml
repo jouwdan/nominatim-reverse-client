@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nominatim-reverse-client"
-version = "0.1.0"
+version = "0.1.1"
 description = "Async reverse geocoding with a caller-owned session and explicit provider"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -19,9 +19,9 @@ classifiers = [
 ]
 
 [project.urls]
-Source = "https://github.com/jouwdan/ha-pleos/tree/main/packages/nominatim-reverse-client"
-Issues = "https://github.com/jouwdan/ha-pleos/issues"
-Changelog = "https://github.com/jouwdan/ha-pleos/blob/main/packages/nominatim-reverse-client/CHANGELOG.md"
+Source = "https://github.com/jouwdan/nominatim-reverse-client"
+Issues = "https://github.com/jouwdan/nominatim-reverse-client/issues"
+Changelog = "https://github.com/jouwdan/nominatim-reverse-client/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = ["build>=1", "coverage>=7", "mypy>=1.10", "ruff>=0.11", "twine>=6"]
